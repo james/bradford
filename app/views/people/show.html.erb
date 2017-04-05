@@ -1,0 +1,8 @@
+<p><%= @person.name %></p>
+<p><%= @person.phone_number %></p>
+<p><%= @person.refugee %></p>
+
+<p><%= link_to "edit", edit_person_path(@person) %></p>
+<%= form_for @person, method: :delete do |form| %>
+  <%= form.submit 'delete' %>
+<% end %>
