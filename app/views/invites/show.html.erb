@@ -1,0 +1,16 @@
+<p>You have been invited by <%= @attendance.invitee.name %> to attend <%= @attendance.event.name %> at <%= @attendance.event.starts_at %> at <%= @attendance.event.location %></p>
+
+<%= form_for @attendance, url: invite_path(@attendance.code) do |form| %>
+  <%= form.fields_for :person do |person_form| %>
+    <div class="form-group">
+      <%= person_form.label :name %>
+      <%= person_form.text_field :name, class: 'form-control' %>
+    </div>
+
+    <div class="form-group">
+      <%= person_form.label :phone_number %>
+      <%= person_form.text_field :phone_number, class: 'form-control' %>
+    </div>
+  <% end %>
+  <%= form.submit %>
+<% end %>

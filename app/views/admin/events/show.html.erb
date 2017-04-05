@@ -16,7 +16,7 @@
     <% if attendance.person.present? %>
       <li><%= link_to attendance.person.name, admin_person_path(attendance.person) %></li>
     <% else %>
-      <li>Unnaccepted invite from <%= link_to attendance.invitee.name, admin_person_path(attendance.invitee) %></li>
+      <li><%= link_to "Unnaccepted invite", invite_path(attendance.code) %> from <%= link_to attendance.invitee.name, admin_person_path(attendance.invitee) %></li>
     <% end %>
   <% end %>
 </ul>
