@@ -17,19 +17,19 @@ class Admin::EventsController < ApplicationController
 
   def create
     @event = Event.create(event_params)
-    redirect_to event_path(@event)
+    redirect_to admin_event_path(@event)
   end
 
   def update
     @event = Event.find(params[:id])
     @event.update_attributes(event_params)
-    redirect_to event_path(@event)
+    redirect_to admin_event_path(@event)
   end
 
   def destroy
     @event = Event.find(params[:id])
     @event.destroy!
-    redirect_to events_path
+    redirect_to admin_events_path
   end
 
   private

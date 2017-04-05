@@ -17,19 +17,19 @@ class Admin::PeopleController < ApplicationController
 
   def create
     @person = Person.create(person_params)
-    redirect_to person_path(@person)
+    redirect_to admin_person_path(@person)
   end
 
   def update
     @person = Person.find(params[:id])
     @person.update_attributes(person_params)
-    redirect_to person_path(@person)
+    redirect_to admin_person_path(@person)
   end
 
   def destroy
     @person = Person.find(params[:id])
     @person.destroy!
-    redirect_to people_path
+    redirect_to admin_people_path
   end
 
   private
