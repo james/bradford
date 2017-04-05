@@ -1,0 +1,22 @@
+<p><%= @event.name %></p>
+<p><%= @event.starts_at %></p>
+<p><%= @event.location %></p>
+
+<p><%= link_to "edit", edit_admin_event_path(@event) %></p>
+<%= form_for [:admin, @event], method: :delete do |form| %>
+  <%= form.submit 'delete' %>
+<% end %>
+
+<hr />
+
+<h2>Attendees</h2>
+
+<ul>
+  <% @event.attendances.each do |attendance| %>
+    <% if attendance.person.present? %>
+      <li><%= link_to attendance.person.name, admin_person_path(attendance.person) %></li>
+    <% else %>
+      <li>Unnaccepted invite from <%= link_to attendance.invitee.name, admin_person_path(attendance.invitee) %></li>
+    <% end %>
+  <% end %>
+</ul>

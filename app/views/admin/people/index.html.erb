@@ -1,0 +1,6 @@
+<ul>
+  <% @people.each do |person| %>
+    <li><%= link_to person.name, admin_person_path(person) %></li>
+  <% end %>
+</ul>
+<p><%= link_to "New Person", new_admin_person_path %></p>

@@ -2,8 +2,8 @@
 <p><%= @person.phone_number %></p>
 <p><%= @person.refugee %></p>
 
-<p><%= link_to "edit", edit_person_path(@person) %></p>
-<%= form_for @person, method: :delete do |form| %>
+<p><%= link_to "edit", edit_admin_person_path(@person) %></p>
+<%= form_for [:admin, @person], method: :delete do |form| %>
   <%= form.submit 'delete' %>
 <% end %>
 
@@ -11,7 +11,7 @@
 
 <ul>
   <% @person.events.each do |event| %>
-    <li><%= link_to event.name, event_path(event) %></li>
+    <li><%= link_to event.name, admin_event_path(event) %></li>
   <% end %>
 </ul>
 
@@ -23,7 +23,7 @@
   <% end %>
 </ul>
 
-<%= form_for Attendance.new do |form| %>
+<%= form_for [:admin, Attendance.new] do |form| %>
   <%= form.hidden_field :invitee_id, value: @person.id %>
   <div class="form-group">
     <%= form.label :event %>

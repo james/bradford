@@ -1,4 +1,4 @@
-class AttendancesController < ApplicationController
+class Admin::AttendancesController < ApplicationController
   def create
     def create
       @attendance = Attendance.create!(attendance_params)

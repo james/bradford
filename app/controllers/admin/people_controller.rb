@@ -1,4 +1,4 @@
-class PeopleController < ApplicationController
+class Admin::PeopleController < ApplicationController
   def index
     @people = Person.all
   end
