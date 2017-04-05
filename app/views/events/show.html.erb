@@ -1,0 +1,8 @@
+<p><%= @event.name %></p>
+<p><%= @event.starts_at %></p>
+<p><%= @event.location %></p>
+
+<p><%= link_to "edit", edit_event_path(@event) %></p>
+<%= form_for @event, method: :delete do |form| %>
+  <%= form.submit 'delete' %>
+<% end %>
