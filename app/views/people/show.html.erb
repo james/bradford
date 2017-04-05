@@ -6,3 +6,11 @@
 <%= form_for @person, method: :delete do |form| %>
   <%= form.submit 'delete' %>
 <% end %>
+
+<h2>Events</h2>
+
+<ul>
+  <% @person.events.each do |event| %>
+    <li><%= link_to event.name, event_path(event) %></li>
+  <% end %>
+</ul>
