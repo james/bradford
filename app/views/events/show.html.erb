@@ -12,7 +12,11 @@
 <h2>Attendees</h2>
 
 <ul>
-  <% @event.people.each do |person| %>
-    <li><%= link_to person.name, person_path(person) %></li>
+  <% @event.attendances.each do |attendance| %>
+    <% if attendance.person.present? %>
+      <li><%= link_to attendance.person.name, person_path(attendance.person) %></li>
+    <% else %>
+      <li>Unnaccepted invite from <%= link_to attendance.invitee.name, person_path(attendance.invitee) %></li>
+    <% end %>
   <% end %>
 </ul>
