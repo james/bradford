@@ -3,7 +3,7 @@ require "rails_helper"
 RSpec.feature "New user is invited by a friend", :type => :feature do
   before do
     @event = Event.create!(name: "Test Event 1", starts_at: "01/01/2018 15:30".to_time)
-    @inviter = Person.create!(name: "Test Invitee")
+    @inviter = Person.create!(name: "Test Invitee", phone_number: "012345")
     @attendance = Attendance.create!(event: @event, invitee: @inviter, state: 'new')
   end
   scenario "User clicks yes" do
