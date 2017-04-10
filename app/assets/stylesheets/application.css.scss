@@ -13,3 +13,34 @@
  *= require_tree .
  *= require_self
  */
+header.header {
+  background-image: image-url('header_bg.jpg');
+  background-size: cover;
+  background-position: center;
+  text-align: center;
+  img {
+    height: 120px;
+    padding: 10px;
+  }
+}
+
+.invites {
+  p, h2 {
+    text-align: center;
+  }
+  font-size: 1.2em;
+
+  .time_and_location {
+    img {
+      width:100%;
+      border: 1px solid #000;
+    }
+
+    .date_time_location {
+      p {
+        font-size: 1.3em;
+        margin: 0;
+      }
+    }
+  }
+}

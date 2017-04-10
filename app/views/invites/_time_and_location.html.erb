@@ -1,0 +1,12 @@
+<div class="row time_and_location">
+  <div class="col-xs-4">
+    <img src="https://maps.googleapis.com/maps/api/staticmap?&zoom=16&size=220x220&markers=|Capital of Cycling, BD1 5SD&key=AIzaSyCV9iEIo1IFU3o56__KSfBLD9NNXLD-2mk" />
+  </div>
+  <div class="col-xs-8 date_time_location">
+    <p class="date"><%= friendly_date @attendance.event.starts_at %></p>
+
+    <p class="time"><%= two_hour_event_time @attendance.event.starts_at %></p>
+
+    <p><%= @attendance.event.location %></p>
+  </div>
+</div>

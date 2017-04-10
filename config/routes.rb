@@ -5,5 +5,13 @@ Rails.application.routes.draw do
     resources :people
     resources :attendances
   end
-  resources :invites
+  resources :invites do
+    member do
+      patch 'respond_to_return_invite'
+      patch 'respond_to_new_invite'
+      get 'share'
+      get 'rejected'
+      get 'confirmed'
+    end
+  end
 end

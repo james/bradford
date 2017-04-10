@@ -1,0 +1,32 @@
+<h2>You've been invited!</h2>
+
+<p>Hi! <%= @attendance.invitee.name %> has invited you to join them to meet some refugees.</p>
+
+<%= render partial: 'time_and_location' %>
+
+<p>We’re Local Welcome, and we help refugees meet local people, so they can practice their english and make connections in their new community.</p>
+
+<p>We do this by getting 4 refugees and 4 local volunteers to meet and cook together.</p>
+
+<p>We’d love you to join us. Please let us know either way.</p>
+
+<%= form_for @attendance, url: respond_to_new_invite_invite_path(@attendance.code) do |form| %>
+  <%= form.hidden_field :state, value: 'confirmed' %>
+  <%= form.fields_for :person do |person_form| %>
+    <div class="form-group">
+      <%= person_form.label :name %>
+      <%= person_form.text_field :name, class: 'form-control' %>
+    </div>
+
+    <div class="form-group">
+      <%= person_form.label :phone_number %>
+      <%= person_form.text_field :phone_number, class: 'form-control' %>
+    </div>
+  <% end %>
+  <%= form.submit "I can come!", class: "btn btn-primary" %>
+<% end %>
+
+<%= form_for @attendance, url: respond_to_new_invite_invite_path(@attendance.code) do |form| %>
+  <%= form.hidden_field :state, value: 'rejected' %>
+  <%= form.submit "I can't come", class: "btn btn-default" %>
+<% end %>
