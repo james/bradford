@@ -14,6 +14,13 @@ class Admin::AttendancesController < AdminController
     redirect_to admin_event_path(@attendance.event)
   end
 
+  def destroy
+    @attendance = Attendance.find(params[:id])
+    @event = @attendance.event
+    @attendance.destroy!
+    redirect_to admin_event_path(@event)
+  end
+
   private
   def attendance_params
     params.require(:attendance).permit(:state, :invitee_id, :person_id, :event_id, person_attributes: [:name, :phone_number, :refugee])

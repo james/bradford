@@ -17,6 +17,7 @@
     <th>Status</th>
     <th>Invited by</th>
     <th>Invite link</th>
+    <th></th>
   </tr>
   <% @event.attendances.each do |attendance| %>
     <tr>
@@ -34,6 +35,11 @@
         <% end %>
       </td>
       <td><%= link_to attendance.code, invite_path(attendance.code) %></td>
+      <td>
+        <%= form_for [:admin, attendance], method: :delete do |form| %>
+          <%= form.submit "delete" %>
+        <% end %>
+      </td>
     </tr>
   <% end %>
 </table>
