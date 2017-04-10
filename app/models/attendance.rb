@@ -14,12 +14,11 @@ class Attendance < ApplicationRecord
     self.update_attribute(:state, 'confirmed')
   end
 
-  def create_invite!
-    Attendance.create!(event: self.event, invitee: self.person)
-  end
-
   def reject!
     self.update_attribute(:state, 'rejected')
+    if self.shareable_invite
+      self.shareable_invite.update_attribute(:state, 'inviter_rejected')
+    end
   end
 
   def for_refugee?
@@ -32,5 +31,9 @@ class Attendance < ApplicationRecord
 
   def shareable_invites
     Attendance.where(event: self.event, invitee: self.person)
+  end
+
+  def shareable_invite
+    shareable_invites.first
   end
 end

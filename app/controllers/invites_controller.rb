@@ -15,8 +15,11 @@ class InvitesController < ApplicationController
     @attendance = Attendance.find_by_code(params[:id])
     if attendance_params[:state] == 'confirmed'
       @attendance.confirm!
-      @invite = @attendance.create_invite!
-      redirect_to share_invite_path(@invite.code)
+      if @attendance.shareable_invite
+        redirect_to share_invite_path(@attendance.shareable_invite.code)
+      else
+        redirect_to confirmed_invite_path(@attendance.code)
+      end
     else
       @attendance.reject!
       redirect_to rejected_invite_path(@attendance.code)
