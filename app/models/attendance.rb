@@ -22,6 +22,14 @@ class Attendance < ApplicationRecord
     self.update_attribute(:state, 'rejected')
   end
 
+  def for_refugee?
+    if person
+      person.refugee?
+    else
+      invitee.refugee?
+    end
+  end
+
   def shareable_invites
     Attendance.where(event: self.event, invitee: self.person)
   end

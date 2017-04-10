@@ -14,6 +14,7 @@
 <table class="table">
   <tr>
     <th>Name</th>
+    <th>Refugee?</th>
     <th>Status</th>
     <th>Invited by</th>
     <th>Invite link</th>
@@ -26,6 +27,13 @@
           <%= link_to attendance.person.name, admin_person_path(attendance.person) %>
         <% else %>
           ???
+        <% end %>
+      </td>
+      <td>
+        <% if attendance.for_refugee? %>
+          Refugee
+        <% else %>
+          Volunteer
         <% end %>
       </td>
       <td><%= attendance.state %></td>
