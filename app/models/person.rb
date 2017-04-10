@@ -5,8 +5,4 @@ class Person < ApplicationRecord
 
   validates :name, presence: true
   validates :phone_number, presence: true
-
-  def self.inheritance_column
-    'something_else'
-  end
 end
