@@ -16,6 +16,6 @@ class Admin::AttendancesController < AdminController
 
   private
   def attendance_params
-    params.require(:attendance).permit(:invitee_id, :person_id, :event_id, person_attributes: [:name, :phone_number])
+    params.require(:attendance).permit(:state, :invitee_id, :person_id, :event_id, person_attributes: [:name, :phone_number, :refugee])
   end
 end
