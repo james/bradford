@@ -11,12 +11,31 @@
 
 <h2>Attendees</h2>
 
-<ul>
+<table class="table">
+  <tr>
+    <th>Name</th>
+    <th>Status</th>
+    <th>Invited by</th>
+    <th>Invite link</th>
+  </tr>
   <% @event.attendances.each do |attendance| %>
-    <% if attendance.person.present? %>
-      <li><%= link_to attendance.person.name, admin_person_path(attendance.person) %></li>
-    <% else %>
-      <li><%= link_to "Unnaccepted invite", invite_path(attendance.code) %> from <%= link_to attendance.invitee.name, admin_person_path(attendance.invitee) %></li>
-    <% end %>
+    <tr>
+      <td>
+        <% if attendance.person.present? %>
+          <%= link_to attendance.person.name, admin_person_path(attendance.person) %>
+        <% else %>
+          ???
+        <% end %>
+      </td>
+      <td><%= attendance.state %></td>
+      <td>
+        <% if attendance.invitee.present? %>
+          <%= link_to attendance.invitee.name, admin_person_path(attendance.invitee) %>
+        <% end %>
+      </td>
+      <td><%= link_to attendance.code, invite_path(attendance.code) %></td>
+    </tr>
   <% end %>
-</ul>
+</table>
+
+<%= link_to "Add an attendee", new_admin_attendance_path(event_id: @event) %>

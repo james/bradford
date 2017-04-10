@@ -1,0 +1,39 @@
+<div class="form-group">
+  <%= form.label :event_id %>
+  <%= form.select :event_id, Event.all.collect {|e| [e.name, e.id]}, {}, {class: 'form-control' } %>
+</div>
+
+<div class="form-group">
+  <%= form.label :person_id %>
+  <%= form.select :person_id, Person.all.collect {|e| [e.name, e.id]}, {include_blank: '* New Person *'}, {class: 'form-control'} %>
+</div>
+
+<div class="new_person_fields">
+  <%= form.fields_for :person do |person_form| %>
+    <div class="form-group">
+      <%= person_form.label :name %>
+      <%= person_form.text_field :name, class: 'form-control' %>
+    </div>
+
+    <div class="form-group">
+      <%= person_form.label :phone_number %>
+      <%= person_form.text_field :phone_number, class: 'form-control' %>
+    </div>
+  <% end %>
+</div>
+
+<script type="text/javascript">
+  $(function() {
+    function hideOrShowPersonFields() {
+      if ( $('#attendance_person_id').val() == '' ) {
+        $('.new_person_fields').show();
+      } else {
+        $('.new_person_fields').hide();
+      }
+    }
+
+    hideOrShowPersonFields();
+
+    $('#attendance_person_id').change(hideOrShowPersonFields);
+  })
+</script>
