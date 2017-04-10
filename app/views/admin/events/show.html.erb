@@ -40,6 +40,8 @@
       <td>
         <% if attendance.invitee.present? %>
           <%= link_to attendance.invitee.name, admin_person_path(attendance.invitee) %>
+        <% else %>
+          Local Welcome
         <% end %>
       </td>
       <td><%= link_to attendance.code, invite_path(attendance.code) %></td>
