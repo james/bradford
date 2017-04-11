@@ -1,8 +1,10 @@
-<h2>Hi <%= @attendance.person.name %>. Thanks for attending. Will you come again?</h2>
+<h2>Hi <%= @attendance.person.name.split(" ").first %>.</h2>
+
+<p>Thanks for cooking rostis with us 2 weeks ago.<br /> We have another event in 14 days.<br /> Would you like to come again?<br /><br /></p>
 
 <%= render partial: 'time_and_location' %>
 
-<h2>Can you come?</h2>
+<h2>Will you join us?</h2>
 
 <div class="row yes_no_buttons">
   <div class="col-xs-6">

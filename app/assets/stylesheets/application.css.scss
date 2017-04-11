@@ -25,7 +25,7 @@ header.header {
 }
 
 .invites {
-  p, h2 {
+  p, h2, h3 {
     text-align: center;
   }
   font-size: 1.2em;
@@ -38,8 +38,12 @@ header.header {
 
     .date_time_location {
       p {
+        text-align: left;
         font-size: 1.3em;
         margin: 0;
+      }
+      .address p {
+        font-size: 0.8em;
       }
     }
   }
@@ -48,8 +52,15 @@ header.header {
 .yes_no_buttons {
   div {
     text-align: center;
+    margin-top: 10px;
     input {
-      width: 80%;
+      width: 90%;
+      font-size: 1.2em;
     }
   }
+}
+
+.invite_link {
+  border: 1px solid #999;
+  padding: 10px;
 }
