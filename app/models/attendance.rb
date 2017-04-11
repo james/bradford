@@ -6,6 +6,9 @@ class Attendance < ApplicationRecord
 
   before_create :set_code
 
+  scope :confirmed, -> { where(state: 'confirmed') }
+  scope :unconfirmed, -> { where(state: 'new') }
+
   def set_code
     self.code = SecretSanta.create_code
   end

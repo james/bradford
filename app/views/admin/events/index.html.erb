@@ -1,6 +1,19 @@
-<ul>
+<h2>Events</h2>
+
+<table class="table">
+  <tr>
+    <th>Name</th>
+    <th>Date/Time</th>
+    <th>Confirmed</th>
+    <th>Unconfirmed</th>
+  </tr>
   <% @events.each do |event| %>
-    <li><%= link_to event.name, admin_event_path(event) %></li>
+    <tr>
+      <td><%= link_to event.name, admin_event_path(event) %></td>
+      <td><%= friendly_date event.starts_at %> <%= two_hour_event_time event.starts_at %></td>
+      <td><%= event.attendances.confirmed.count %></td>
+      <td><%= event.attendances.unconfirmed.count %></td>
+    </tr>
   <% end %>
-</ul>
-<p><%= link_to "New Event", new_admin_event_path %></p>
+</table>
+<p><%= link_to "New Event", new_admin_event_path, class: 'btn btn-default' %></p>

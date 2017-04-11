@@ -1,11 +1,12 @@
-<p><%= @event.name %></p>
-<p><%= @event.starts_at %></p>
+<h2>Admin for <%= @event.name %></h2>
+
+<p class="date"><%= friendly_date @event.starts_at %></p>
+
+<p class="time"><%= two_hour_event_time @event.starts_at %></p>
+
 <p><%= @event.location %></p>
 
-<p><%= link_to "edit", edit_admin_event_path(@event) %></p>
-<%= form_for [:admin, @event], method: :delete do |form| %>
-  <%= form.submit 'delete' %>
-<% end %>
+<p><%= link_to "Edit these details", edit_admin_event_path(@event) %></p>
 
 <hr />
 
@@ -64,7 +65,7 @@
     <%= form_for [:admin, Attendance.new] do |form| %>
       <%= form.hidden_field :event_id, value: @event.id %>
       <%= form.select :invitee_id, @event.people.collect {|x| [x.name, x.id]}, {}, {class: 'form-control'} %>
-      <%= form.submit "create invite from this person" %>
+      <%= form.submit "Create invite code for this person", class: 'btn btn-default' %>
     <% end %>
   </div>
 </div>

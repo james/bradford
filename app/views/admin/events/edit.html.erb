@@ -2,3 +2,7 @@
   <%= render partial: 'fields', locals: {form: form} %>
   <%= form.submit %>
 <% end %>
+
+<%= form_for [:admin, @event], method: :delete do |form| %>
+  <%= form.submit 'Delete this event' %>
+<% end %>
