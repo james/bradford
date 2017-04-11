@@ -3,12 +3,18 @@
 <%= render partial: 'time_and_location' %>
 
 <h2>Can you come?</h2>
-<%= form_for @attendance, url: respond_to_return_invite_invite_path(@attendance.code) do |form| %>
-  <%= form.hidden_field :state, value: 'confirmed' %>
-  <%= form.submit "Yes", class: 'btn btn-default' %>
-<% end %>
 
-<%= form_for @attendance, url: respond_to_return_invite_invite_path(@attendance.code) do |form| %>
-  <%= form.hidden_field :state, value: 'rejected' %>
-  <%= form.submit "No", class: 'btn btn-default' %>
-<% end %>
+<div class="row yes_no_buttons">
+  <div class="col-xs-6">
+    <%= form_for @attendance, url: respond_to_return_invite_invite_path(@attendance.code) do |form| %>
+      <%= form.hidden_field :state, value: 'confirmed' %>
+      <%= form.submit "Yes", class: 'btn btn-default' %>
+    <% end %>
+  </div>
+  <div class="col-xs-6">
+    <%= form_for @attendance, url: respond_to_return_invite_invite_path(@attendance.code) do |form| %>
+      <%= form.hidden_field :state, value: 'rejected' %>
+      <%= form.submit "No", class: 'btn btn-default' %>
+    <% end %>
+  </div>
+</div>
