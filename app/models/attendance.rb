@@ -47,4 +47,8 @@ class Attendance < ApplicationRecord
   def shareable_invite
     shareable_invites.first
   end
+
+  def previous_event
+    person.events.past.order("starts_at DESC").first
+  end
 end

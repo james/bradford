@@ -1,7 +1,7 @@
 class InvitesController < ApplicationController
   def show
     @attendance = Attendance.find_by_code(params[:id])
-    if @attendance.person && @attendance.person.events.count > 1
+    if @attendance.person && @attendance.previous_event.present?
       render template: 'invites/return_invite'
     else
       if @attendance.person.blank?

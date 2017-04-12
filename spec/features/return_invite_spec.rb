@@ -2,7 +2,7 @@ require "rails_helper"
 
 RSpec.feature "User who has been before is invited again by Local Welcome", :type => :feature do
   before(:each) do
-    @event1 = Event.create!(name: "Test Event 1", starts_at: "01/01/2018 15:00".to_time)
+    @event1 = Event.create!(name: "Test Event 1", starts_at: "01/01/2017 15:00".to_time)
     @event2 = Event.create!(name: "Test Event 2", starts_at: "01/02/2018 15:00".to_time)
     @person = Person.create!(name: "Test User", phone_number: "012345")
     @old_attendance = Attendance.create!(event: @event1, person: @person, state: 'confirmed')
