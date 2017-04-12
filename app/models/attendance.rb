@@ -2,6 +2,7 @@ class Attendance < ApplicationRecord
   belongs_to :event
   belongs_to :person, optional: true
   belongs_to :invitee, class_name: "Person", optional: true
+  has_many :attendance_views
   accepts_nested_attributes_for :person
 
   before_create :set_code
@@ -50,5 +51,13 @@ class Attendance < ApplicationRecord
 
   def previous_event
     person.events.past.order("starts_at DESC").first
+  end
+
+  def view_count
+    attendance_views.count
+  end
+
+  def viewed!
+    attendance_views.create!
   end
 end

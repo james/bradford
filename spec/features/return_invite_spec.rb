@@ -13,6 +13,7 @@ RSpec.feature "User who has been before is invited again by Local Welcome", :typ
     @new_attendance.update_attribute(:state, 'confirmed')
     visit "/invites/#{@new_attendance.code}"
     expect(page).to have_text("This invite has already been used.")
+    expect(@new_attendance.view_count).to eq(1)
   end
   scenario "User clicks yes and has an invite to share" do
     visit "/invites/#{@new_attendance.code}"
@@ -27,6 +28,7 @@ RSpec.feature "User who has been before is invited again by Local Welcome", :typ
     reloaded_attendance = Attendance.find(@new_attendance.id)
     expect(reloaded_attendance.state).to eq('confirmed')
     expect(page).to have_text(short_invite_url(@invite_attendance.code))
+    expect(@new_attendance.view_count).to eq(1)
   end
 
   scenario "User clicks yes and has no invite to share" do
@@ -42,6 +44,7 @@ RSpec.feature "User who has been before is invited again by Local Welcome", :typ
 
     reloaded_attendance = Attendance.find(@new_attendance.id)
     expect(reloaded_attendance.state).to eq('confirmed')
+    expect(@new_attendance.view_count).to eq(1)
   end
 
   scenario "User clicks no" do
@@ -58,5 +61,6 @@ RSpec.feature "User who has been before is invited again by Local Welcome", :typ
     expect(reloaded_attendance.state).to eq('rejected')
     reloaded_invite = Attendance.find(@invite_attendance.id)
     expect(reloaded_invite.state).to eq('inviter_rejected')
+    expect(@new_attendance.view_count).to eq(1)
   end
 end

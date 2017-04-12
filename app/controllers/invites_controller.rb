@@ -4,6 +4,7 @@ class InvitesController < ApplicationController
   end
 
   def show
+    Attendance.find_by_code(params[:id]).viewed!
     if @attendance = Attendance.unconfirmed.find_by_code(params[:id])
       if @attendance.person && @attendance.previous_event.present?
         render template: 'invites/return_invite'

@@ -10,7 +10,9 @@ RSpec.feature "New user is invited", :type => :feature do
     @attendance.update_attribute(:state, 'confirmed')
     visit "/invites/#{@attendance.code}"
     expect(page).to have_text("This invite has already been used.")
+    expect(@attendance.view_count).to eq(1)
   end
+
   scenario "User clicks yes when invited by a friend" do
     visit "/invites/#{@attendance.code}"
 
@@ -29,6 +31,7 @@ RSpec.feature "New user is invited", :type => :feature do
     expect(reloaded_attendance.person.phone_number).to eq("0123456789")
     sharing_invite = reloaded_attendance.shareable_invites.first
     expect(sharing_invite).to eq(nil)
+    expect(@attendance.view_count).to eq(1)
   end
 
   scenario "User clicks yes when invited by us" do
@@ -50,6 +53,7 @@ RSpec.feature "New user is invited", :type => :feature do
     expect(reloaded_attendance.person.phone_number).to eq("0123456789")
     sharing_invite = reloaded_attendance.shareable_invites.first
     expect(sharing_invite).to eq(nil)
+    expect(@attendance.view_count).to eq(1)
   end
 
   scenario "User clicks no" do
@@ -65,5 +69,6 @@ RSpec.feature "New user is invited", :type => :feature do
     expect(reloaded_attendance.state).to eq('rejected')
     sharing_invite = reloaded_attendance.shareable_invites.first
     expect(sharing_invite).to eq(nil)
+    expect(@attendance.view_count).to eq(1)
   end
 end
