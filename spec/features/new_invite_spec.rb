@@ -20,7 +20,8 @@ RSpec.feature "New user is invited by a friend", :type => :feature do
     expect(page).to have_text("Great! Looking forward to it.")
     reloaded_attendance = Attendance.find(@attendance.id)
     expect(reloaded_attendance.state).to eq('confirmed')
-    expect(reloaded_attendance.person).to_not eq(nil)
+    expect(reloaded_attendance.person.name).to eq("New Test")
+    expect(reloaded_attendance.person.phone_number).to eq("0123456789")
     sharing_invite = reloaded_attendance.shareable_invites.first
     expect(sharing_invite).to eq(nil)
   end
