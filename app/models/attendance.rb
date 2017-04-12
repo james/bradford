@@ -32,6 +32,14 @@ class Attendance < ApplicationRecord
     end
   end
 
+  def seats_left
+    if for_refugee?
+      4 - event.people.refugees.count
+    else
+      4 - event.people.volunteers.count
+    end
+  end
+
   def shareable_invites
     Attendance.where(event: self.event, invitee: self.person)
   end

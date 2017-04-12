@@ -5,11 +5,16 @@
 <h2>Would you like to bring a friend?</h2>
 
 <p>
-  Each event needs 4 local volunteers
+  Each event needs 4
+  <% if @attendance.for_refugee? %>
+    refugees
+  <% else %>
+    local volunteers
+  <% end %>
 </p>
 
 <p>
-  We currently have 3 seats left around the table
+  We currently have <%= @attendance.seats_left %> seats left around the table
 </p>
 
 <p>We've reserved 1 seat so you can bring a friend</p>
