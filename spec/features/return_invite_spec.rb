@@ -12,12 +12,12 @@ RSpec.feature "User who has been before is invited again by Local Welcome", :typ
   scenario "User clicks yes and has an invite to share" do
     visit "/invites/#{@new_attendance.code}"
 
-    expect(page).to have_text("Hi Test User. Thanks for attending. Will you come again?")
+    expect(page).to have_text("Hi Test. Thanks for cooking rostis with us")
     expect(page).to have_text("1st Feb")
     expect(page).to have_text("3PM - 5PM")
     click_button "Yes"
 
-    expect(page).to have_text("Great! Looking forward to it.")
+    expect(page).to have_text("Great!")
 
     reloaded_attendance = Attendance.find(@new_attendance.id)
     expect(reloaded_attendance.state).to eq('confirmed')
@@ -28,12 +28,12 @@ RSpec.feature "User who has been before is invited again by Local Welcome", :typ
     @invite_attendance.destroy!
     visit "/invites/#{@new_attendance.code}"
 
-    expect(page).to have_text("Hi Test User. Thanks for attending. Will you come again?")
+    expect(page).to have_text("Hi Test. Thanks for cooking rostis with us")
     expect(page).to have_text("1st Feb")
     expect(page).to have_text("3PM - 5PM")
     click_button "Yes"
 
-    expect(page).to have_text("Great! Looking forward to it.")
+    expect(page).to have_text("Great!")
 
     reloaded_attendance = Attendance.find(@new_attendance.id)
     expect(reloaded_attendance.state).to eq('confirmed')
@@ -42,7 +42,7 @@ RSpec.feature "User who has been before is invited again by Local Welcome", :typ
   scenario "User clicks no" do
     visit "/invites/#{@new_attendance.code}"
 
-    expect(page).to have_text("Hi Test User. Thanks for attending. Will you come again?")
+    expect(page).to have_text("Hi Test. Thanks for cooking rostis with us")
     expect(page).to have_text("1st Feb")
     expect(page).to have_text("3PM - 5PM")
     click_button "No"

@@ -30,6 +30,7 @@ class InvitesController < ApplicationController
     @attendance = Attendance.find_by_code(params[:id])
     if attendance_params[:state] == 'confirmed'
       @attendance.confirm!
+      @attendance.update_attributes(attendance_params)
       redirect_to confirmed_invite_path(@attendance.code)
     else
       @attendance.reject!
