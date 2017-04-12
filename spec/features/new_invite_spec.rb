@@ -6,6 +6,11 @@ RSpec.feature "New user is invited", :type => :feature do
     @inviter = Person.create!(name: "Test Invitee", phone_number: "012345")
     @attendance = Attendance.create!(event: @event, invitee: @inviter, state: 'new')
   end
+  scenario "User clicks on confirmed invite" do
+    @attendance.update_attribute(:state, 'confirmed')
+    visit "/invites/#{@attendance.code}"
+    expect(page).to have_text("This invite has already been used.")
+  end
   scenario "User clicks yes when invited by a friend" do
     visit "/invites/#{@attendance.code}"
 

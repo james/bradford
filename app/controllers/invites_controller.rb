@@ -1,13 +1,16 @@
 class InvitesController < ApplicationController
   def show
-    @attendance = Attendance.find_by_code(params[:id])
-    if @attendance.person && @attendance.previous_event.present?
-      render template: 'invites/return_invite'
-    else
-      if @attendance.person.blank?
-        @attendance.person = Person.new
+    if @attendance = Attendance.unconfirmed.find_by_code(params[:id])
+      if @attendance.person && @attendance.previous_event.present?
+        render template: 'invites/return_invite'
+      else
+        if @attendance.person.blank?
+          @attendance.person = Person.new
+        end
+        render template: 'invites/new_invite'
       end
-      render template: 'invites/new_invite'
+    else
+      render template: 'invites/used'
     end
   end
 

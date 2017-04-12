@@ -9,6 +9,11 @@ RSpec.feature "User who has been before is invited again by Local Welcome", :typ
     @new_attendance = Attendance.create!(event: @event2, person: @person, state: 'new')
     @invite_attendance = Attendance.create!(event: @event2, invitee: @person, state: 'new')
   end
+  scenario "User clicks on confirmed invite" do
+    @new_attendance.update_attribute(:state, 'confirmed')
+    visit "/invites/#{@new_attendance.code}"
+    expect(page).to have_text("This invite has already been used.")
+  end
   scenario "User clicks yes and has an invite to share" do
     visit "/invites/#{@new_attendance.code}"
 
