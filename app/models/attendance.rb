@@ -15,20 +15,6 @@ class Attendance < ApplicationRecord
 
   def confirm!
     self.update_attribute(:state, 'confirmed')
-    send_confirmation_text
-  end
-
-  def send_confirmation_text
-    if ENV['TWILLIO_ID'] && Rails.env != 'test'
-      datetime = event.starts_at
-      @client = Twilio::REST::Client.new
-      @client.messages.create(
-        from: '+441133207067',
-        to: self.person.phone_number,
-        body: "Hi #{person.first_name}. We look forward to seeing you.
-#{datetime.day}#{datetime.day.ordinal} #{datetime.strftime("%b")} #{datetime.strftime("%-I:%M%p")} - #{event.location}"
-      )
-    end
   end
 
   def reject!

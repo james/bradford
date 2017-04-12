@@ -22,6 +22,7 @@ class InvitesController < ApplicationController
     @attendance = Attendance.find_by_code(params[:id])
     if attendance_params[:state] == 'confirmed'
       @attendance.confirm!
+      send_confirmation_text(@attendance)
       if @attendance.shareable_invite
         redirect_to share_invite_path(@attendance.shareable_invite.code)
       else
@@ -68,5 +69,25 @@ class InvitesController < ApplicationController
 
   def attendance_params
     params.require(:attendance).permit(:state, person_attributes: [:name, :phone_number])
+  end
+
+  def send_confirmation_text(attendance)
+    if ENV['TWILLIO_ID'] && Rails.env != 'test'
+      @client = Twilio::REST::Client.new
+      @client.messages.create(
+        from: '+441133207067',
+        to: attendance.person.phone_number,
+        body: confirmation_message(attendance)
+      )
+    end
+  end
+
+  def confirmation_message(attendance)
+    datetime = attendance.event.starts_at
+    msg = "Hi #{attendance.person.first_name}. We look forward to seeing at the Local Welcome event. The details are:\n#{datetime.day}#{datetime.day.ordinal} #{datetime.strftime("%b")} #{datetime.strftime("%-I:%M%p")} - #{attendance.event.location}"
+    if attendance.shareable_invite
+      msg += "\n\nRemember you have a an invite to invite a friend. Just send them this link: #{short_invite_url(attendance.shareable_invite.code)}"
+    end
+    msg
   end
 end
