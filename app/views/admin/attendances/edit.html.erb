@@ -1,0 +1,7 @@
+<%= form_for [:admin, @attendance] do |form| %>
+  <div class="form-group">
+    <%= form.label :state %>
+    <%= form.select :state, ['new', 'confirmed', 'rejected'], {}, {class: 'form-control'} %>
+  </div>
+  <%= form.submit %>
+<% end %>

@@ -37,7 +37,7 @@
           Volunteer
         <% end %>
       </td>
-      <td><%= attendance.state %></td>
+      <td><%= link_to attendance.state, edit_admin_attendance_path(attendance) %></td>
       <td>
         <% if attendance.invitee.present? %>
           <%= link_to attendance.invitee.name, admin_person_path(attendance.invitee) %>

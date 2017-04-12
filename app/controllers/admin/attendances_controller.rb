@@ -14,6 +14,16 @@ class Admin::AttendancesController < AdminController
     redirect_to admin_event_path(@attendance.event)
   end
 
+  def edit
+    @attendance = Attendance.find(params[:id])
+  end
+
+  def update
+    @attendance = Attendance.find(params[:id])
+    @attendance.update_attribute(:state, attendance_params[:state])
+    redirect_to admin_event_path(@attendance.event)
+  end
+
   def destroy
     @attendance = Attendance.find(params[:id])
     @event = @attendance.event
