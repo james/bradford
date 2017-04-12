@@ -26,7 +26,7 @@ RSpec.feature "User who has been before is invited again by Local Welcome", :typ
 
     reloaded_attendance = Attendance.find(@new_attendance.id)
     expect(reloaded_attendance.state).to eq('confirmed')
-    expect(page).to have_text(invite_path(@invite_attendance.code))
+    expect(page).to have_text(short_invite_url(@invite_attendance.code))
   end
 
   scenario "User clicks yes and has no invite to share" do

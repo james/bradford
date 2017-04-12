@@ -14,4 +14,5 @@ Rails.application.routes.draw do
       get 'confirmed'
     end
   end
+  get '/:code', to: 'invites#redirect', as: 'short_invite'
 end

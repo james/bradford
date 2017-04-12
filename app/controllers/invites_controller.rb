@@ -1,4 +1,8 @@
 class InvitesController < ApplicationController
+  def redirect
+    redirect_to invite_path(params[:code])
+  end
+
   def show
     if @attendance = Attendance.unconfirmed.find_by_code(params[:id])
       if @attendance.person && @attendance.previous_event.present?

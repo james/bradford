@@ -45,7 +45,7 @@
           Local Welcome
         <% end %>
       </td>
-      <td><%= link_to attendance.code, invite_path(attendance.code) %></td>
+      <td><%= link_to attendance.code, short_invite_path(attendance.code) %></td>
       <td>
         <%= form_for [:admin, attendance], method: :delete do |form| %>
           <%= form.submit "delete" %>
