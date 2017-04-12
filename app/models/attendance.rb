@@ -19,7 +19,7 @@ class Attendance < ApplicationRecord
   end
 
   def send_confirmation_text
-    if ENV['TWILLIO_ID']
+    if ENV['TWILLIO_ID'] && Rails.env != 'test'
       datetime = event.starts_at
       @client = Twilio::REST::Client.new
       @client.messages.create(
