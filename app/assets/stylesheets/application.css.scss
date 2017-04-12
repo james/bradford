@@ -18,6 +18,7 @@ header.header {
   background-size: cover;
   background-position: center;
   text-align: center;
+  margin-bottom: 1em;
   img {
     height: 120px;
     padding: 10px;
@@ -31,19 +32,29 @@ header.header {
   font-size: 1.2em;
 
   .time_and_location {
-    img {
-      width:100%;
-      border: 1px solid #000;
-    }
-
-    .date_time_location {
+    .date_time {
+      border: 1px solid #999;
+      border-radius: 4px;
+      margin-bottom: 1em;
       p {
-        text-align: left;
-        font-size: 1.3em;
         margin: 0;
+        padding: 0.5em 0;
       }
-      .address p {
-        font-size: 0.8em;
+      p.date {
+        background-color: rgb(220, 65, 63);
+        font-weight: bold;
+        color: white;
+      }
+      p.time {
+
+      }
+    }
+    .location {
+      text-align: center;
+      svg {
+        height: 30px;
+      }
+      .address {
       }
     }
   }

@@ -1,18 +1,23 @@
 <h2>Great!</h2>
 
-<p>We've just sent you a text message with the details.</p>
+<p>We've just sent you a text message with the details</p>
 
 <h2>Would you like to bring a friend?</h2>
 
 <p>
-  We need 4 local volunteers to make this work.<br />
-  We currently have 3 seats left.
+  Each event needs 4 local volunteers
 </p>
 
-<p>Here's a unique invitation link for a friend.</p>
+<p>
+  We currently have 3 seats left around the table
+</p>
+
+<p>We've reserved 1 seat so you can bring a friend</p>
+
+<p>Just send them this invitation link</p>
 
 <!-- <p>Send this link to a friend, which will explain it, and let them tell us if they can come.</p> -->
 
-<p class="invite_link">http://app.local-welcome.org/<%= @attendance.code %></p>
+<p class="invite_link"><%= invite_url(@attendance.code) %></p>
 
-<p>We've reserved one seat for the next 7 days.</p>
+<p><sub>Invitation link expires in 7 days</sub></p>

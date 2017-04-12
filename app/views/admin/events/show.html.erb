@@ -56,11 +56,11 @@
 </table>
 
 <div class="row">
-  <div class="col-xs-6">
+  <div class="col-6">
     <h2>Add an attendee</h2>
     <%= link_to "Click here to create an attendance", new_admin_attendance_path(event_id: @event) %>
   </div>
-  <div class="col-xs-6">
+  <div class="col-6">
     <h2>Create an invite for an attendee</h2>
     <%= form_for [:admin, Attendance.new] do |form| %>
       <%= form.hidden_field :event_id, value: @event.id %>

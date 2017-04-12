@@ -1,13 +1,14 @@
-<div class="row time_and_location">
-  <div class="col-xs-4">
-    <img src="https://maps.googleapis.com/maps/api/staticmap?&zoom=16&size=220x220&markers=|Capital of Cycling, BD1 5SD&key=AIzaSyCV9iEIo1IFU3o56__KSfBLD9NNXLD-2mk" />
-    <p><a href="#">Directions</a>
-  </div>
-  <div class="col-xs-8 date_time_location">
-    <p class="date"><strong>Date:</strong> <%= friendly_date @attendance.event.starts_at %></p>
-
-    <p class="time"><strong>Time:</strong> <%= two_hour_event_time @attendance.event.starts_at %></p>
-
-    <p class="address"><strong>Address:</strong> <%= @attendance.event.location %></p>
+<div class="time_and_location">
+  <div class="row">
+    <div class="col-5">
+      <div class="date_time">
+        <p class="date"><%= friendly_date @attendance.event.starts_at %></p>
+        <p class="time"><%= two_hour_event_time @attendance.event.starts_at %></p>
+      </div>
+    </div>
+    <div class="col-7 location">
+      <svg xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:svg="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" version="1.1" x="0px" y="0px" viewBox="0 0 100 125"><g transform="translate(0,-952.36218)"><path style="text-indent:0;text-transform:none;direction:ltr;block-progression:tb;baseline-shift:baseline;color:#000000;enable-background:accumulate;" d="m 49.96875,958.36216 c -11.6024,0 -20.96875,9.66115 -20.96875,21.5 0,2.85673 0.75045,6.08194 1.65625,8.5 2.1936,4.66053 4.43595,9.33835 6.65625,14.00004 l -11.3125,0 c -1.0583,0.01 -1.693,0.7122 -1.9375,1.5625 l -8,40 c -0.2601,1.1607 0.748,2.429 1.9375,2.4375 l 64,0 c 1.1895,-0.01 2.1976,-1.2768 1.9375,-2.4375 l -8,-40 c -0.1959,-0.8738 -1.042,-1.5562 -1.9375,-1.5625 l -11.3125,0 c 2.2094,-4.66502 4.47065,-9.3383 6.65625,-14.00004 0.9124,-2.42336 1.65625,-5.6448 1.65625,-8.5 0,-11.84471 -9.42885,-21.5 -21.03125,-21.5 z m 0,4 c 9.3863,0 17.03125,7.76311 17.03125,17.5 0,2.10321 -0.67705,5.15696 -1.40625,7.09375 L 50,1019.6747 34.40625,986.95591 C 33.67935,985.01543 33,981.96163 33,979.86216 c 0,-9.74275 7.58255,-17.5 16.96875,-17.5 z m 0.0312,7 c -5.4992,0 -10,4.50084 -10,10 0,5.49915 4.5008,10 10,10 5.4992,0 10,-4.50085 10,-10 0,-5.49916 -4.5008,-10 -10,-10 z m 0,4 c 3.3374,0 6,2.6626 6,6 0,3.3374 -2.6626,6 -6,6 -3.3374,0 -6,-2.6626 -6,-6 0,-3.3374 2.6626,-6 6,-6 z m -22.40625,33.00004 11.625,0 8.96875,18.8437 c 0.3198,0.6852 1.0564,1.1563 1.8125,1.1563 0.7562,0 1.4927,-0.4711 1.8125,-1.1563 l 8.96875,-18.8437 11.625,0 7.125,36 -59.0625,0 z" fill="#000000" fill-opacity="1" fill-rule="nonzero" stroke="none" marker="none" visibility="visible" display="inline" overflow="visible"/></g></svg>
+      <p class="address"><%= @attendance.event.location %></p>
+    </div>
   </div>
 </div>

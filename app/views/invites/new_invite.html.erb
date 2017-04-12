@@ -1,12 +1,14 @@
 <h2>You've been invited!</h2>
 
-<p>Hi! <%= @attendance.invitee.name %> has invited you to join them to meet some refugees.</p>
+<p><%= @attendance.invitee.name %> is attending a Local Welcome event.</p>
+
+<p>Would you like to join him?</p>
 
 <%= render partial: 'time_and_location' %>
 
-<p>We’re Local Welcome, and we help refugees meet local people, so they can practice their english and make connections in their new community.</p>
+<p>Local Welcome helps refugees practice English and make connections in their new community.</p>
 
-<p>We do this by getting 4 refugees and 4 local volunteers to meet and cook together.</p>
+<p>Each event connects 4 refugees with 4 local volunteers to meet and cook together.</p>
 
 <p>We’d love you to join us. Please let us know either way.</p>
 
@@ -20,13 +22,21 @@
 
     <div class="form-group">
       <%= person_form.label :phone_number %>
-      <%= person_form.text_field :phone_number, class: 'form-control' %>
+      <%= person_form.phone_field :phone_number, class: 'form-control' %>
     </div>
   <% end %>
-  <%= form.submit "I can come!", class: "btn btn-primary" %>
+  <div class="form-group">
+    <%= form.submit "I can come!", class: "btn btn-primary", style: "float: right; width: 40%;" %>
+  </div>
 <% end %>
 
 <%= form_for @attendance, url: respond_to_new_invite_invite_path(@attendance.code) do |form| %>
   <%= form.hidden_field :state, value: 'rejected' %>
-  <%= form.submit "I can't come", class: "btn btn-default" %>
+  <div class="form-group">
+    <%= form.submit "I can't come", class: "btn btn-secondary", style: "float: left; width: 40%;" %>
+  </div>
 <% end %>
+
+<hr style="clear:both; padding-bottom: 1em; border: 0" />
+
+<p>If you have any questions, text us on <a href="sms:07811407085">07811407085</a> or ask <%= @attendance.invitee.name.split(" ").first %></p>
