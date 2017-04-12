@@ -4,6 +4,12 @@
 
 <h2>Would you like to bring a friend?</h2>
 
+<p>Just send them this invitation link</p>
+
+<p class="invite_link"><%= link_to invite_url(@attendance.code), invite_url(@attendance.code) %></p>
+
+<p><sub>Invitation link expires in 7 days</sub></p>
+
 <p>
   Each event needs 4
   <% if @attendance.for_refugee? %>
@@ -18,11 +24,3 @@
 </p>
 
 <p>We've reserved 1 seat so you can bring a friend</p>
-
-<p>Just send them this invitation link</p>
-
-<!-- <p>Send this link to a friend, which will explain it, and let them tell us if they can come.</p> -->
-
-<p class="invite_link"><%= invite_url(@attendance.code) %></p>
-
-<p><sub>Invitation link expires in 7 days</sub></p>
