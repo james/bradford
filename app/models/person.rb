@@ -8,4 +8,8 @@ class Person < ApplicationRecord
 
   validates :name, presence: true
   validates :phone_number, presence: true
+
+  def first_name
+    name.split(" ").first
+  end
 end
