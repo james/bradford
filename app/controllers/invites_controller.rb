@@ -40,9 +40,11 @@ class InvitesController < ApplicationController
     if attendance_params[:state] == 'confirmed'
       @attendance.update_attributes(attendance_params)
       @attendance.confirm!
+      notify_inviter_accepted(@attendance)
       redirect_to confirmed_invite_path(@attendance.code)
     else
       @attendance.reject!
+      notify_inviter_rejected(@attendance)
       redirect_to rejected_invite_path(@attendance.code)
     end
   end
@@ -90,5 +92,27 @@ class InvitesController < ApplicationController
       msg += "\n\nRemember you have a an invite to invite a friend. Just send them this link: #{short_invite_url(attendance.shareable_invite.code)}"
     end
     msg
+  end
+
+  def notify_inviter_accepted(attendance)
+    if attendance.invitee && ENV['TWILLIO_ID'] && Rails.env != 'test'
+      @client = Twilio::REST::Client.new
+      @client.messages.create(
+        from: '+441133207067',
+        to: attendance.invitee.phone_number,
+        body: "Good news! #{attendance.person.name} has accepted your invite to attend the Local Welcome event."
+      )
+    end
+  end
+
+  def notify_inviter_rejected(attendance)
+    if attendance.invitee && ENV['TWILLIO_ID'] && Rails.env != 'test'
+      @client = Twilio::REST::Client.new
+      @client.messages.create(
+        from: '+441133207067',
+        to: attendance.invitee.phone_number,
+        body: "Unfortunately your invite to attend the Local Welcome event was rejected by who you sent it to.\nDon't worry, you can still share your invite link with someone else:\n#{short_invite_url(attendance.code)}"
+      )
+    end
   end
 end
