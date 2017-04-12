@@ -6,7 +6,7 @@
 
 <p>Just send them this invitation link</p>
 
-<p class="invite_link"><%= link_to invite_url(@attendance.code), invite_url(@attendance.code) %></p>
+<p class="invite_link"><%= link_to invite_url(@attendance.code), "whatsapp://send?text=#{invite_url(@attendance.code)}" %></p>
 
 <p><sub>Invitation link expires in 7 days</sub></p>
 
