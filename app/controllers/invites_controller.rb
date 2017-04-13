@@ -40,6 +40,7 @@ class InvitesController < ApplicationController
     if attendance_params[:state] == 'confirmed'
       @attendance.update_attributes(attendance_params)
       @attendance.confirm!
+      send_confirmation_text(@attendance)
       notify_inviter_accepted(@attendance)
       redirect_to confirmed_invite_path(@attendance.code)
     else
