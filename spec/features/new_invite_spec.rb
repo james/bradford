@@ -3,7 +3,8 @@ require "rails_helper"
 RSpec.feature "New user is invited", :type => :feature do
   before do
     @event = Event.create!(name: "Test Event 1", starts_at: "01/01/2018 15:30".to_time)
-    @inviter = Person.create!(name: "Test Invitee", phone_number: "012345")
+    @inviter = Person.create!(name: "Test Inviter", phone_number: "012345")
+    @inviter_attendance = Attendance.create!(event: @event, person: @inviter, state: 'confirmed')
     @attendance = Attendance.create!(event: @event, invitee: @inviter, state: 'new')
   end
   scenario "User clicks on confirmed invite" do
@@ -16,7 +17,7 @@ RSpec.feature "New user is invited", :type => :feature do
   scenario "User clicks yes when invited by a friend" do
     visit "/invites/#{@attendance.code}"
 
-    expect(page).to have_text("Test Invitee is attending a Local Welcome event")
+    expect(page).to have_text("Test Inviter is attending a Local Welcome event")
     expect(page).to have_text("1st Jan")
     expect(page).to have_text("3:30PM - 5:30PM")
 
@@ -29,8 +30,7 @@ RSpec.feature "New user is invited", :type => :feature do
     expect(reloaded_attendance.state).to eq('confirmed')
     expect(reloaded_attendance.person.name).to eq("New Test")
     expect(reloaded_attendance.person.phone_number).to eq("0123456789")
-    sharing_invite = reloaded_attendance.shareable_invites.first
-    expect(sharing_invite).to eq(nil)
+
     expect(@attendance.view_count).to eq(1)
   end
 
@@ -51,15 +51,14 @@ RSpec.feature "New user is invited", :type => :feature do
     expect(reloaded_attendance.state).to eq('confirmed')
     expect(reloaded_attendance.person.name).to eq("New Test")
     expect(reloaded_attendance.person.phone_number).to eq("0123456789")
-    sharing_invite = reloaded_attendance.shareable_invites.first
-    expect(sharing_invite).to eq(nil)
+
     expect(@attendance.view_count).to eq(1)
   end
 
   scenario "User clicks no" do
     visit "/invites/#{@attendance.code}"
 
-    expect(page).to have_text("Test Invitee is attending a Local Welcome event")
+    expect(page).to have_text("Test Inviter is attending a Local Welcome event")
     expect(page).to have_text("1st Jan")
     expect(page).to have_text("3:30PM - 5:30PM")
     click_button "I can't come"
@@ -67,8 +66,10 @@ RSpec.feature "New user is invited", :type => :feature do
     expect(page).to have_text("That's a shame")
     reloaded_attendance = Attendance.find(@attendance.id)
     expect(reloaded_attendance.state).to eq('rejected')
-    sharing_invite = reloaded_attendance.shareable_invites.first
-    expect(sharing_invite).to eq(nil)
+
+    inviter_attendance = Attendance.find(@inviter_attendance.id)
+    expect(inviter_attendance.state).to eq('confirmed')
+
     expect(@attendance.view_count).to eq(1)
   end
 end

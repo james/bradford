@@ -42,7 +42,11 @@ class Attendance < ApplicationRecord
   end
 
   def shareable_invites
-    Attendance.where(event: self.event, invitee: self.person)
+    if self.person
+      Attendance.where(event: self.event, invitee: self.person)
+    else
+      []
+    end
   end
 
   def shareable_invite
