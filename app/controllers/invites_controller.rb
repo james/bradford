@@ -76,14 +76,10 @@ class InvitesController < ApplicationController
   end
 
   def send_confirmation_text(attendance)
-    if ENV['TWILLIO_ID'] && Rails.env != 'test'
-      @client = Twilio::REST::Client.new
-      @client.messages.create(
-        from: '+441133207067',
-        to: attendance.person.phone_number,
-        body: confirmation_message(attendance)
-      )
-    end
+    TextMessaging.send_message(
+      to: attendance.person.phone_number,
+      body: confirmation_message(attendance)
+    )
   end
 
   def confirmation_message(attendance)
@@ -96,10 +92,8 @@ class InvitesController < ApplicationController
   end
 
   def notify_inviter_accepted(attendance)
-    if attendance.invitee && ENV['TWILLIO_ID'] && Rails.env != 'test'
-      @client = Twilio::REST::Client.new
-      @client.messages.create(
-        from: '+441133207067',
+    if attendance.invitee
+      TextMessaging.send_message(
         to: attendance.invitee.phone_number,
         body: "Good news! #{attendance.person.name} has accepted your invite to attend the Local Welcome event."
       )
@@ -107,10 +101,8 @@ class InvitesController < ApplicationController
   end
 
   def notify_inviter_rejected(attendance)
-    if attendance.invitee && ENV['TWILLIO_ID'] && Rails.env != 'test'
-      @client = Twilio::REST::Client.new
-      @client.messages.create(
-        from: '+441133207067',
+    if attendance.invitee
+      TextMessaging.send_message(
         to: attendance.invitee.phone_number,
         body: "Unfortunately your invite to attend the Local Welcome event was rejected by who you sent it to.\nDon't worry, you can still share your invite link with someone else:\n#{short_invite_url(attendance.code)}"
       )
