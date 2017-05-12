@@ -1,7 +1,7 @@
 <h2>Hi <%= @attendance.person.name.split(" ").first %>.</h2>
 
 <p>
-  Thanks for cooking rostis with us <%= lw_time_ago_in_words(@attendance.previous_event.starts_at) %>.
+  Thanks for cooking rostis with us <%= lw_time_ago_in_words(Event.last_event.starts_at) %>.
   <br /> We have another event <%= lw_time_until_in_words(@attendance.event.starts_at) %>.
   <br /> Would you like to come again?<br /><br />
 </p>
